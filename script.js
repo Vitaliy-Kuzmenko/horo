@@ -1,58 +1,200 @@
-const userName =  document.getElementById('name_user'); //Подключил поле для ввода имени
-const userDate = document.getElementById('date_user'); //подключил форму выбора даты
+const inputUserName =  document.getElementById('name_user'); //Подключил поле для ввода имени
+const inputUserDate = document.getElementById('date_user'); //подключил форму выбора даты
 const btn_sumbit = document.getElementById('btn_sumbit'); // Подключил кнопку "получить результат"
+const btn_sumbitAlluser = document.getElementById('btn_sumbitAlluser'); // Подключил кнопку "получить результат"
 const results = document.getElementById('results');//подключил блок для вывода результатов
 const currentDate = new Date(); // Получили текущую дату 
 console.log('Текущая дата ' + currentDate)
-const nameHoro = ['пустой, чтоб несчитать 0','Год Свиньи','Год Крысы','Год Быка', 'Год Тигра','Год Кролика','Год Дракона','Год Змеи','Год Лошади','Год Козы','Год Обезьяны','Год Петуха','Год Собаки'];
+const nameHoro = ['Год Обезьяны','Год Петуха','Год Собаки', 'Год Свиньи','Год Крысы','Год Быка', 'Год Тигра','Год Кролика','Год Дракона','Год Змеи','Год Лошади','Год Козы',];
 const yearHoro = [1934, 1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945]; // минимальные даты для каждого знака
-const arrCalcYearHoro = [] //массив вычитаний 12 лет от введённого года до заданного минимума
-console.log(arrCalcYearHoro)
-let UserCorrentHoro = 'Вы родились в '
-console.log (UserCorrentHoro)
-let testInput = 1988; // ввёдённая дата пользователем
-const calcYearHoro = ()=> {//функция вычитающая по 12 лет от введённой даты до заданного лимита
-  for(i=testInput; i>=1934; i= i-12){
-    console.log(i)
-    arrCalcYearHoro.push(i)// передал вычисления в массив
+
+let userCorrentHoro // объявил переменную в которую запишем животное пользователя по китайцам
+let ageUserY // сколько лет пользователю
+let ageUserM // сколько месяцев пользователю
+let ageUserD // сколько дней пользователю
+let ageUserT// сколько часов
+let arrinputUserDate // объявил переменную в которую запишем ввдеённую дату без разделителя [yyyy, mm, dd]
+
+
+
+const calcYearHoro = () => {
+  //функция вычесляющая остаток от деления на 12 лет от введённой даты
+  let a = arrinputUserDate[0] % 12;
+  userCorrentHoro = nameHoro[a];
+};
+
+const getFullUserYear = () => {
+  arrinputUserDate = inputUserDate.value.split("-"); //разбил строку с датой в массив, убрав разделитель[yyyy, mm, dd]
+  console.log(arrinputUserDate);
+
+  ageUserY = currentDate.getFullYear() - arrinputUserDate[0]; // считаем возраст (года)
+  ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]; // считаем возраст (месяцы)
+  ageUserD = (ageUserY * 365) + (ageUserM * 30); // считаем возраст (дни)
+  ageUserT = ageUserD * 24; // считаем возраст (часы)
+  console.log(
+    "Ваш возраст " +
+      ageUserY +
+      " лет, " +
+      ageUserD +
+      " дней, " +
+      ageUserT +
+      " минут"
+  );
+  console.log(ageUserM + " Полных Месяцев");
+ 
+};
+
+
+
+
+////////////////////////////////////////////////////////////////
+//добавление пользователей в массив объектов//
+///////////////////////////////////////////////////////////////
+let userInfo = [] // переменая для хранения данных пользователей
+
+const userInfoTemp = ()=>{ //функция собирающая в объект все данные пользователя
+ let a
+  a = {
+  'name': inputUserName.value,
+  'ageUserY1':  ageUserY,
+  'ageUserM': ageUserM,
+  'ageUserD': ageUserD,
+  'ageUserT': ageUserT,
+  'userCorrentHoro': userCorrentHoro,
+  }
+  userInfo.push(a)
 }
-}
-calcYearHoro ()
-
-yearHoro.forEach((elem1, i1) =>{ // взял массив с датами и перебираю их в цикле до совпадения при вычитание в цикле -12 лет от введённой даты
-  //console.log(elem)
-  arrCalcYearHoro.forEach((elem2) =>{
-
-    if  (elem1 === elem2){
-      console.log(i1)
-      console.log(nameHoro[i1])
-      UserCorrentHoro = nameHoro[i1]
-      console.log('bad')
-    }
-  } 
-  )
-}
-)
 
 
+const printRes = () => { //вывод результатов на страницу
+  results.innerHTML =
+    "<p><b>Текущая дата </b></p>" +
+    currentDate +
+    "<p><b>Ваше имя </b></p>" +
+    inputUserName.value +
+    "<p><b>Ваш возраст </b></p>" +
+    ageUserY +
+    " лет " +
+    "<p></p>" +
+    ageUserM +
+    " Месяцев, " +
+    "<p></p>" +
+    ageUserD +
+    " Всего дней, " +
+    ageUserT +
+    " Всего минут " +
+    "<p><b>Ваш китайский гороскоп</b></p>" +
+    userCorrentHoro; 
+    
+};
 
-btn_sumbit.onclick = ()=>{ 
-  console.log('Имя пользователя ' + userName.value);
-  console.log('Введена дата ' + userDate.value);
-  let arrUserDate = userDate.value.split('-');//разбил строку с датой в массив, убрав разделитель[yyyy, mm, dd]
-  console.log(arrUserDate);
 
-    let ageUserY = currentDate.getFullYear() - arrUserDate[0]; // считаем возраст (года)
-    let ageUserD = ageUserY * 365; // считаем возраст (дни)
-    let ageUserM = ageUserD * 24; // считаем возраст (часы)   
-    console.log ('Ваш возраст ' + ageUserY + ' лет, ' + ageUserD + ' дней, ' + ageUserM + ' минут');
-  let b = arrUserDate[0];
-  console.log(b)
+const printAlluser = () => { //вывод результатов на страницу
+   //= "<b>Все пользователи - </b>" +   + // Всего пользователей
+for(let i = 0; i <=userInfo.length - 1; i++){
+  results.innerHTML = 
+  "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
+  "<p></p>"+
+  "<b>Имя - </b>" + userInfo[i].name + 
+ "<p></p>"+
+  "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
+  "<p></p>"+
+  "<b>Гороскоп - </b>" + userCorrentHoro
 
+};
+
+
+
+
+ const test = [1,2,3,4,5,6]
+ for (let test1 of test){
+  let newList = document.createElement('p');
+  newList.textContent = test1
+  results.appendChild(newList)
+ }
  
 
+  }
+ 
+
+
+// const printAlluser = () => { //вывод результатов на страницу
+//   for(let i = 0; i <=userInfo.length - 1; i++){
+//   results.innerHTML =
+//   "<b>Все пользователи - </b>" + userInfo.length  + // Всего пользователей
+//   "<p></p>"+
+//   "<b>Имя - </b>" + userInfo[i].name + 
+//  "<p></p>"+
+//   "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
+//   "<p></p>"+
+//   "<b>Гороскоп - </b>" + userCorrentHoro
+// };
+// }
+
+btn_sumbit.onclick = ()=>{ 
+  getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
+  calcYearHoro () //Находим какой знак по китайскому гороскопу
+  userInfoTemp() // вызываем функцию собирающую в оюъект все данные пользователя и добавлющаяя  эти данные в массив
+  printRes() //выводим результат на страницу
+  console.log (userInfo )
+  //alert('download complead')
+}
+btn_sumbitAlluser.onclick = ()=>{
+  printAlluser()
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+// const arrCalcYearHoro = [] //массив вычитаний 12 лет от введённого года до заданного минимума
+// console.log(arrCalcYearHoro)
+
+//   for(let i=testInput; i>=1934; i= i-12){
+//     console.log(i)
+//     arrCalcYearHoro.push(i)// передал вычисления в массив
+// }
+
+
+
+// yearHoro.forEach((elem1, i1) =>{ // взял массив с датами и перебираю их в цикле до совпадения при вычитание в цикле -12 лет от введённой даты
+//   //console.log(elem)
+//   arrCalcYearHoro.forEach((elem2) =>{
+
+//     if  (elem1 === elem2){
+//       console.log(i1)
+//       userCorrentHoro = 'Вы родились в ' +  nameHoro[i1]
+//           } else {
+//             console.log('bad')
+//           }
+//   } 
+//   )
+// }
+// )
+
+
+//////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 // function test (){ //  вариант 1 добавляем в массив циклом года от и до для каждого знака
 // for (i = 1911; i <= 2031; i = i + 12) {
 //   yearHoro[0].push(i);
@@ -60,7 +202,9 @@ btn_sumbit.onclick = ()=>{
 // console.log(yearHoro[0]);
 // }
 // test ()
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 // function test2 (startYear, finishYear,AdressNameHoro){ // вариант 2 добавляем в массив циклом года от и до для каждого знака при новом вызове функции
 //   for (i = startYear; i <= finishYear; i = i + 12) {
 //     yearHoro[AdressNameHoro].push(i);
@@ -70,11 +214,9 @@ btn_sumbit.onclick = ()=>{
 //   }
 //   test2 (1934,2031,0)
 //   test2 (1935,2032,1)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
  // let b = 0
 // const testF = ()=> {// функция отнимает по 12 лет до тех пор пока не остановится на минимальном значении
 //   for (i = testInput; i >= yearHoro2[b]; i=i-12) {
@@ -88,37 +230,33 @@ btn_sumbit.onclick = ()=>{
 //  testF()
 
 // }
- 
-  
+////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-
-
-
-
-//   if(arrUserDate[0] == c){
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//   if(arrinputUserDate[0] == c){
 //     console.log(nameHoro[0])
-//    } else if (arrUserDate[0] == 1912) {
+//    } else if (arrinputUserDate[0] == 1912) {
 //     console.log(nameHoro[1])
-//    } else if (arrUserDate[0] == 1913) {
+//    } else if (arrinputUserDate[0] == 1913) {
 //     console.log(nameHoro[2])
-//    } else if (arrUserDate[0] == 1914) {
+//    } else if (arrinputUserDate[0] == 1914) {
 //     console.log(nameHoro[3])
-//    } else if (arrUserDate[0] == 1915) {
+//    } else if (arrinputUserDate[0] == 1915) {
 //     console.log(nameHoro[4])
-//    } else if (arrUserDate[0] == 1916) {
+//    } else if (arrinputUserDate[0] == 1916) {
 //     console.log(nameHoro[5])
-//    } else if (arrUserDate[0] == 1917) {
+//    } else if (arrinputUserDate[0] == 1917) {
 //     console.log(nameHoro[6])
-//    } else if (arrUserDate[0] == 1918) {
+//    } else if (arrinputUserDate[0] == 1918) {
 //     console.log(nameHoro[7])
-//    } else if (arrUserDate[0] == 1919) {
+//    } else if (arrinputUserDate[0] == 1919) {
 //     console.log(nameHoro[8])
-//    } else if (arrUserDate == 1920) {
+//    } else if (arrinputUserDate == 1920) {
 //     console.log(nameHoro[9])
-//    } else if (arrUserDate[0] == 1921) {
+//    } else if (arrinputUserDate[0] == 1921) {
 //     console.log(nameHoro[10])
-//    } else if (arrUserDate[0] == 1922) {
+//    } else if (arrinputUserDate[0] == 1922) {
 //     console.log(nameHoro[11])
 //    } 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
   
