@@ -21,16 +21,88 @@ body .conteiner {
     width: 210px;
     height: 400px;
     margin: 10px;
-    background-color: #ff00ff;
+    background-color: #221d1d;
     font-size: 12pt;
     color: #ffffff;
 
 }
 
+/*Название каждого блока меню*/
+.name_block_menu {
+    background-color: #555555;
+    text-align: center; /*выравнивание*/
+    margin: 5px;
+    padding: 10px; /*Отступ от содержимого внутри по кругу*/
+    color: #ffffff;
+    border-style: solid; /* Один из видов рамки - есть другие и много, если не объявить рамки не видно*/
+    border-width: 1px; /*Ширина рамки*/
+    border-color: #ffffff; /*Цвет рамки*/
+    border-radius: 5px;
+    
+    
+}
+    
+/*убираем маркеры и отступы*/
+.menu {
+        list-style: none; /* убрал точки с маркера*/
+    padding-inline-start: 0; /* ???? обнулил отступ слева, т.к без него список отступает на 40 пикселей в право*/
+    }
+
+
+/*задаём стили для тега li*/
+.menu li {
+     margin: 0px; /*отступ для каждой ссылки в списке li*/
+     padding: 0px; /*отступ для самого текста  каждой ссылки в списке li*/
+     }
+
+/*задаём стиль для ссылок в меню*/
+.menu_link_a {
+    display: block;
+    margin: 1px;
+    text-decoration: none;  
+    padding:12px 20px;
+    color:#57d2ff;
+    background: rgba(0, 0, 0, 0);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Общие стили оформления для меню*/
+.menu_color {
+    margin-top: 0px;
+    background: #555555; /*задний фон блока с ссылками*/
+}
+
+/* Подсветка пункта при наведении */
+.menu_color > ul > li > a:hover {
+  color: #bbb;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Активный пункт */
+.menu_color > ul > li.active > a:hover {
+  color:#fff;
+  background:rgba(0, 0, 0, 0.4);
+}
+
+/*оболочка блока с клонтеном в меню*/
+.block_menu {
+    margin-top: 5px;
+    background-color: #555555;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    border-radius: 5px;
+    
+}
+
+
+
+
 .center {
     float: left;
     width: 60%;
-    height: 600px;
+    height: 1000px;
     background-color: #0089ff;
 }
 .navConteiner {
