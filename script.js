@@ -65,6 +65,30 @@ const userInfoTemp = ()=>{ //функция собирающая в объект
   userInfo.push(a)
 }
 
+const printAlluser = () => { //вывод результатов на страницу (69 строка)
+  for(let i = 0; i <=userInfo.length - 1; i++){
+    results.innerHTML = 
+    "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
+    "<p></p>"+
+    "<b>Имя - </b>" + userInfo[i].name + 
+   "<p></p>"+
+    "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
+    "<p></p>"+
+    "<b>Гороскоп - </b>" + userCorrentHoro
+  
+  };
+  
+  const test = [1,2,3,4,5,6]
+   for (let test1 of test){
+    let newList = document.createElement('p');
+    newList.textContent = test1
+    results.appendChild(newList)
+   }
+   
+  
+  }
+
+
 
 const printRes = () => { //вывод результатов на страницу
   results.innerHTML =
@@ -89,32 +113,57 @@ const printRes = () => { //вывод результатов на страниц
 };
 
 
-const printAlluser = () => { //вывод результатов на страницу
-   //= "<b>Все пользователи - </b>" +   + // Всего пользователей
-for(let i = 0; i <=userInfo.length - 1; i++){
-  results.innerHTML = 
-  "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
-  "<p></p>"+
-  "<b>Имя - </b>" + userInfo[i].name + 
- "<p></p>"+
-  "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
-  "<p></p>"+
-  "<b>Гороскоп - </b>" + userCorrentHoro
 
-};
+// const printAlluser = () => { //вывод результатов на страницу
+//   results.innerHTML= "<b>Всего пользователей - </b>" + userInfo.length  // Всего пользователей и обнулил блок
 
+//   let testUserBase
+// for(let i = 0; i <=userInfo.length - 1; i++){
+//    testUserBase = 
+//   "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
+//   "<p></p>"+
+//   "<b>Имя - </b>" + userInfo[i].name + 
+//  "<p></p>"+
+//   "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
+//   "<p></p>"+
+//   "<b>Гороскоп - </b>" + userCorrentHoro
+// };
+// results.appendChild(testUserBase)
 
-
-
- const test = [1,2,3,4,5,6]
- for (let test1 of test){
-  let newList = document.createElement('p');
-  newList.textContent = test1
-  results.appendChild(newList)
- }
+//  const test = [1,2,3,4,5,6]
+//  for (let test1 of test){
+//   let newList = document.createElement('p');
+//   newList.textContent = test1
+//   results.appendChild(newList)
+//  }
  
+// }
 
-  }
+
+// const printAlluser = () => { //вывод результатов на страницу
+//   results.innerHTML= "<b>Всего пользователей - </b>" + userInfo.length  // Всего пользователей и обнулил блок
+
+//   let testUserBase
+// for(let i = 0; i <=userInfo.length - 1; i++){
+//    testUserBase = 
+//   "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
+//   "<p></p>"+
+//   "<b>Имя - </b>" + userInfo[i].name + 
+//  "<p></p>"+
+//   "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
+//   "<p></p>"+
+//   "<b>Гороскоп - </b>" + userCorrentHoro
+// };
+// results.appendChild(testUserBase)
+
+//  const test = [1,2,3,4,5,6]
+//  for (let test1 of test){
+//   let newList = document.createElement('p');
+//   newList.textContent = test1
+//   results.appendChild(newList)
+//  }
+ 
+// }
  
 
 
