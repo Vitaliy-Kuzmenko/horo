@@ -65,28 +65,65 @@ const userInfoTemp = ()=>{ //функция собирающая в объект
   userInfo.push(a)
 }
 
+
 const printAlluser = () => { //вывод результатов на страницу (69 строка)
-  for(let i = 0; i <=userInfo.length - 1; i++){
-    results.innerHTML = 
-    "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
-    "<p></p>"+
-    "<b>Имя - </b>" + userInfo[i].name + 
-   "<p></p>"+
-    "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
-    "<p></p>"+
-    "<b>Гороскоп - </b>" + userCorrentHoro
+results.innerHTML = '' // затёр блок результатов
+
+userInfo.forEach((user , i) => {
+  const userNode = document.createElement('div') // создаём блок
+ // Шаблонными литерал $
+  userNode.innerHTML = `
+  <div>
+  <b>Пользователь - </b> ${i + 1}
+  <br>
+  <b>Имя - </b> ${user.name}
+  <br>
+  <b>Возраст - </b> ${user.ageUserY1}
+  <br>
+  <b>Гороскоп - </b> ${user.userCorrentHoro}
+  <br>
+  </div>
+  `
+  results.appendChild(userNode)
+
+}
+
+)
   
-  };
-  
-  const test = [1,2,3,4,5,6]
-   for (let test1 of test){
-    let newList = document.createElement('p');
-    newList.textContent = test1
-    results.appendChild(newList)
-   }
+  // const test = [1,2,3,4,5,6]
+  //  for (let test1 of test){
+  //   let newList = document.createElement('p');
+  //   newList.textContent = test1
+  //   results.appendChild(newList)
+  //  }
    
   
   }
+
+
+
+// const printAlluser = () => { //вывод результатов на страницу (69 строка)
+//   for(let i = 0; i <=userInfo.length - 1; i++){
+//     results.innerHTML = 
+//     "<b>Пользователь - </b>" + userInfo.length  + // Всего пользователей
+//     "<p></p>"+
+//     "<b>Имя - </b>" + userInfo[i].name + 
+//    "<p></p>"+
+//     "<b>Возраст - </b>" + userInfo[i].ageUserY1 +
+//     "<p></p>"+
+//     "<b>Гороскоп - </b>" + userCorrentHoro
+  
+//   };
+  
+//   const test = [1,2,3,4,5,6]
+//    for (let test1 of test){
+//     let newList = document.createElement('p');
+//     newList.textContent = test1
+//     results.appendChild(newList)
+//    }
+   
+  
+//   }
 
 
 
