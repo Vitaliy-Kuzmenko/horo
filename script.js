@@ -55,12 +55,12 @@ let userInfo = [] // переменая для хранения данных п�
 const userInfoTemp = ()=>{ //функция собирающая в объект все данные пользователя
  let a
   a = {
-  'name': inputUserName.value,
-  'ageUserY1':  ageUserY,
-  'ageUserM': ageUserM,
-  'ageUserD': ageUserD,
-  'ageUserT': ageUserT,
-  'userCorrentHoro': userCorrentHoro,
+  name': inputUserName.value,
+  ageUserY1:  ageUserY,
+  ageUserM: ageUserM,
+  ageUserD: ageUserD,
+  ageUserT: ageUserT,
+  userCorrentHoro: userCorrentHoro,
   }
   userInfo.push(a)
 }
