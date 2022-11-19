@@ -5,6 +5,7 @@ const btn_sumbitAlluser = document.getElementById('btn_sumbitAlluser'); // По�
 const results = document.getElementById('results');//подключил блок для вывода результатов
 const currentDate = new Date(); // Получили текущую дату 
 console.log('Текущая дата ' + currentDate)
+console.log('Текущий месяц ' + currentDate.getMonth() )
 const nameHoro = ['Год Обезьяны','Год Петуха','Год Собаки', 'Год Свиньи','Год Крысы','Год Быка', 'Год Тигра','Год Кролика','Год Дракона','Год Змеи','Год Лошади','Год Козы',];
 const yearHoro = [1934, 1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945]; // минимальные даты для каждого знака
 
@@ -28,7 +29,17 @@ const getFullUserYear = () => {
   console.log(arrinputUserDate);
 
   ageUserY = currentDate.getFullYear() - arrinputUserDate[0]; // считаем возраст (года)
-  ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]; // считаем возраст (месяцы)
+  
+  if(currentDate.getMonth() + 1 <= arrinputUserDate[1]){
+    // расчёт если ДР не наступило
+    ageUserM = (12-arrinputUserDate[1]) + (1+ currentDate.getMonth())
+    ageUserY = currentDate.getFullYear() -1 - arrinputUserDate[0]; 
+  } else{
+    ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]
+    
+  }
+  console.log(ageUserY + 'sds')
+  //ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]; // считаем возраст (месяцы)
   ageUserD = (ageUserY * 365) + (ageUserM * 30); // считаем возраст (дни)
   ageUserT = ageUserD * 24; // считаем возраст (часы)
   console.log(
@@ -55,7 +66,7 @@ let userInfo = [] // переменая для хранения данных п�
 const userInfoTemp = ()=>{ //функция собирающая в объект все данные пользователя
  let a
   a = {
-  name': inputUserName.value,
+  name: inputUserName.value,
   ageUserY1:  ageUserY,
   ageUserM: ageUserM,
   ageUserD: ageUserD,
