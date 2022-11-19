@@ -74,6 +74,7 @@ userInfo.forEach((user , i) => {
  // Шаблонными литерал $
   userNode.innerHTML = `
   <div>
+  <br>
   <b>Пользователь - </b> ${i + 1}
   <br>
   <b>Имя - </b> ${user.name}
