@@ -36,10 +36,8 @@ const getFullUserYear = () => {
     ageUserY = currentDate.getFullYear() -1 - arrinputUserDate[0]; 
   } else{
     ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]
-    
   }
-  console.log(ageUserY + 'sds')
-  //ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]; // считаем возраст (месяцы)
+  
   ageUserD = (ageUserY * 365) + (ageUserM * 30); // считаем возраст (дни)
   ageUserT = ageUserD * 24; // считаем возраст (часы)
   console.log(
@@ -77,13 +75,14 @@ const userInfoTemp = ()=>{ //функция собирающая в объект
 }
 
 
-const printAlluser = () => { //вывод результатов на страницу (69 строка)
-results.innerHTML = '' // затёр блок результатов
+const printAlluser = () => {
+  //вывод результатов на страницу (69 строка)
+  results.innerHTML = ""; // затёр блок результатов
 
-userInfo.forEach((user , i) => {
-  const userNode = document.createElement('div') // создаём блок
- // Шаблонными литерал $
-  userNode.innerHTML = `
+  userInfo.forEach((user, i) => {
+    const userNode = document.createElement("div"); // создаём блок
+    // Шаблонными литерал $
+    userNode.innerHTML = `
   <div>
   <br>
   <b>Пользователь - </b> ${i + 1}
@@ -95,25 +94,78 @@ userInfo.forEach((user , i) => {
   <b>Гороскоп - </b> ${user.userCorrentHoro}
   <br>
   </div>
-  `
-  results.appendChild(userNode)
+  `;
+    results.appendChild(userNode);
+  });
+};
 
+
+
+
+const printRes = () => { //вывод результатов на страницу
+ 
+  results.innerHTML =
+    "<p><b>Текущая дата </b></p>" +
+    currentDate +
+    "<p><b>Ваше имя </b></p>" +
+    inputUserName.value +
+    "<p><b>Ваш возраст </b></p>" +
+    ageUserY +
+    " лет " +
+    "<p></p>" +
+    ageUserM +
+    " Месяцев, " +
+    "<p></p>" +
+    ageUserD +
+    " Всего дней, " +
+    ageUserT +
+    " Всего минут " +
+    "<p><b>Ваш китайский гороскоп</b></p>" +
+    userCorrentHoro; 
+    
+};
+
+
+
+btn_sumbit.onclick = ()=>{ 
+  if(inputUserName.value !== null && !isNaN(inputUserName.value)){ // проверка пустой строки или цифры
+    alert('wrong name!')
+    console.log(22)
+  } else{
+    console.log(33)
+  
+   
+  getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
+  calcYearHoro () //Находим какой знак по китайскому гороскопу
+  userInfoTemp() // вызываем функцию собирающую в оюъект все данные пользователя и добавлющаяя  эти данные в массив
+  printRes() //выводим результат на страницу
+  console.log (userInfo )
+  //alert('download complead')
+}
 }
 
-)
-  
-  // const test = [1,2,3,4,5,6]
+btn_sumbitAlluser.onclick = ()=>{
+  printAlluser()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// const test = [1,2,3,4,5,6]
   //  for (let test1 of test){
   //   let newList = document.createElement('p');
   //   newList.textContent = test1
   //   results.appendChild(newList)
   //  }
    
-  
-  }
-
-
-
 // const printAlluser = () => { //вывод результатов на страницу (69 строка)
 //   for(let i = 0; i <=userInfo.length - 1; i++){
 //     results.innerHTML = 
@@ -136,31 +188,6 @@ userInfo.forEach((user , i) => {
    
   
 //   }
-
-
-
-const printRes = () => { //вывод результатов на страницу
-  results.innerHTML =
-    "<p><b>Текущая дата </b></p>" +
-    currentDate +
-    "<p><b>Ваше имя </b></p>" +
-    inputUserName.value +
-    "<p><b>Ваш возраст </b></p>" +
-    ageUserY +
-    " лет " +
-    "<p></p>" +
-    ageUserM +
-    " Месяцев, " +
-    "<p></p>" +
-    ageUserD +
-    " Всего дней, " +
-    ageUserT +
-    " Всего минут " +
-    "<p><b>Ваш китайский гороскоп</b></p>" +
-    userCorrentHoro; 
-    
-};
-
 
 
 // const printAlluser = () => { //вывод результатов на страницу
@@ -228,36 +255,6 @@ const printRes = () => { //вывод результатов на страниц
 //   "<b>Гороскоп - </b>" + userCorrentHoro
 // };
 // }
-
-btn_sumbit.onclick = ()=>{ 
-  getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
-  calcYearHoro () //Находим какой знак по китайскому гороскопу
-  userInfoTemp() // вызываем функцию собирающую в оюъект все данные пользователя и добавлющаяя  эти данные в массив
-  printRes() //выводим результат на страницу
-  console.log (userInfo )
-  //alert('download complead')
-}
-btn_sumbitAlluser.onclick = ()=>{
-  printAlluser()
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
