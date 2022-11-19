@@ -61,6 +61,26 @@ const getFullUserYear = () => {
 ///////////////////////////////////////////////////////////////
 let userInfo = [] // переменая для хранения данных пользователей
 
+
+const checkData = ()=> { // проверка на одинаковую дату
+currentDate.getFullYear()+currentDate.getMonth()
+// складываем год, месяц и день (2022+12+12)
+let summDateCurrent = 1+ currentDate.getFullYear()+currentDate.getMonth() + currentDate.getDate()
+console.log(summDateCurrent)
+let summDateUser = +arrinputUserDate[0] + +arrinputUserDate[1] + +arrinputUserDate[2]
+console.log(summDateUser)
+//Сравниваю результат сложения
+if( summDateCurrent === summDateUser){
+  alert('Wrong data')
+}
+
+//   if(currentDate.getFullYear() == arrinputUserDate[0], 
+//   currentDate.getMonth() + 1 == arrinputUserDate[1],
+//   currentDate.getDay() == arrinputUserDate[0]
+//   ) {
+//   console.log('wrong data')
+// }
+}
 const userInfoTemp = ()=>{ //функция собирающая в объект все данные пользователя
  let a
   a = {
@@ -73,7 +93,6 @@ const userInfoTemp = ()=>{ //функция собирающая в объект
   }
   userInfo.push(a)
 }
-
 
 const printAlluser = () => {
   //вывод результатов на страницу (69 строка)
@@ -130,16 +149,15 @@ const printRes = () => { //вывод результатов на страниц
 btn_sumbit.onclick = ()=>{ 
   if(inputUserName.value !== null && !isNaN(inputUserName.value)){ // проверка пустой строки или цифры
     alert('wrong name!')
-    console.log(22)
   } else{
-    console.log(33)
-  
-   
   getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
   calcYearHoro () //Находим какой знак по китайскому гороскопу
   userInfoTemp() // вызываем функцию собирающую в оюъект все данные пользователя и добавлющаяя  эти данные в массив
   printRes() //выводим результат на страницу
+  checkData()
   console.log (userInfo )
+  inputUserDate.value = '' // сбросил дату
+  inputUserName.value = '' //сбросил имя
   //alert('download complead')
 }
 }
@@ -148,7 +166,7 @@ btn_sumbitAlluser.onclick = ()=>{
   printAlluser()
 }
 
-
+new Date('1988-03-21')
 
 
 
