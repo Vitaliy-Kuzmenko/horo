@@ -14,9 +14,7 @@ let ageUserY // сколько лет пользователю
 let ageUserM // сколько месяцев пользователю
 let ageUserD // сколько дней пользователю
 let ageUserT// сколько часов
-let arrinputUserDate // объявил переменную в которую запишем ввдеённую дату без разделителя [yyyy, mm, dd]
-
-
+let arrinputUserDate // объявил переменную в которую запишем ввдённую дату без разделителя [yyyy, mm, dd]
 
 const calcYearHoro = () => {
   //функция вычесляющая остаток от деления на 12 лет от введённой даты
@@ -54,33 +52,11 @@ const getFullUserYear = () => {
 };
 
 
-
-
 ////////////////////////////////////////////////////////////////
 //добавление пользователей в массив объектов//
 ///////////////////////////////////////////////////////////////
 let userInfo = [] // переменая для хранения данных пользователей
 
-
-const checkData = ()=> { // проверка на одинаковую дату
-currentDate.getFullYear()+currentDate.getMonth()
-// складываем год, месяц и день (2022+12+12)
-let summDateCurrent = 1+ currentDate.getFullYear()+currentDate.getMonth() + currentDate.getDate()
-console.log(summDateCurrent)
-let summDateUser = +arrinputUserDate[0] + +arrinputUserDate[1] + +arrinputUserDate[2]
-console.log(summDateUser)
-//Сравниваю результат сложения
-if( summDateCurrent === summDateUser){
-  alert('Wrong data')
-}
-
-//   if(currentDate.getFullYear() == arrinputUserDate[0], 
-//   currentDate.getMonth() + 1 == arrinputUserDate[1],
-//   currentDate.getDay() == arrinputUserDate[0]
-//   ) {
-//   console.log('wrong data')
-// }
-}
 const userInfoTemp = ()=>{ //функция собирающая в объект все данные пользователя
  let a
   a = {
@@ -118,7 +94,9 @@ const printAlluser = () => {
   });
 };
 
-
+////////////////////////////////////////////////////////////////
+//вывод результатов на страницу//
+///////////////////////////////////////////////////////////////
 
 
 const printRes = () => { //вывод результатов на страницу
@@ -145,14 +123,52 @@ const printRes = () => { //вывод результатов на страниц
 };
 
 
+////////////////////////////////////////////////////////////////
+//Проверка на одинаковую дату//
+///////////////////////////////////////////////////////////////
+
+
+const checkData = () => {
+  // проверка на одинаковую дату
+  let arrDateCurrent = new Date() // выводит в строке текущую дату(в реверсе) (гггг,мм,дд)
+    .toLocaleDateString()// взял только дату без времени
+    .split(".")//убрал разделитель и добавил всё в массив
+    .reverse()// перевернул массив с [дд мм гггг] в [гггг мм дд]
+    .join(); // перевёл массив строку (гггг,мм,дд)
+  console.log(arrDateCurrent); 
+
+  if (
+    arrDateCurrent === arrinputUserDate.join() ||
+    (arrinputUserDate !== null && !isNaN(arrinputUserDate))
+  ) {
+    alert("wrong date")
+    return true
+    
+  } else{
+    return false
+  }
+};
+
+
+const checkName = ()=>{ // проверка пустой строки или цифры
+  if(inputUserName.value !== null && !isNaN(inputUserName.value)){ 
+    return true
+  } else{
+    return false
+  }
+}
+
 
 btn_sumbit.onclick = ()=>{ 
-  if(inputUserName.value !== null && !isNaN(inputUserName.value)){ // проверка пустой строки или цифры
+  if(checkName(inputUserName)){ // проверка пустой строки или цифры
     alert('wrong name!')
-  } else{
+  } else if(false) {
+    alert('wrong name! 2')
+  } else {
+
   getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
   calcYearHoro () //Находим какой знак по китайскому гороскопу
-  userInfoTemp() // вызываем функцию собирающую в оюъект все данные пользователя и добавлющаяя  эти данные в массив
+  userInfoTemp() // вызываем функцию собирающую в объект все данные пользователя и добавлющаяя  эти данные в массив
   printRes() //выводим результат на страницу
   checkData()
   console.log (userInfo )
@@ -173,7 +189,22 @@ new Date('1988-03-21')
 
 
 
-
+ // складываем год, месяц и день (2022+12+12)
+  // let summDateCurrent = 1+ currentDate.getFullYear()+currentDate.getMonth() + currentDate.getDate()
+  // console.log(summDateCurrent)
+  // let summDateUser = +arrinputUserDate[0] + +arrinputUserDate[1] + +arrinputUserDate[2]
+  // console.log(summDateUser)
+  //Сравниваю результат сложения
+  // if( summDateCurrent === summDateUser){
+  //   alert('Wrong data')
+  // }
+  
+  //   if(currentDate.getFullYear() == arrinputUserDate[0], 
+  //   currentDate.getMonth() + 1 == arrinputUserDate[1],
+  //   currentDate.getDay() == arrinputUserDate[0]
+  //   ) {
+  //   console.log('wrong data')
+  // }
 
 
 
