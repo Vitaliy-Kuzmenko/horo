@@ -25,18 +25,15 @@ const calcYearHoro = () => {
 const getFullUserYear = () => {
   arrinputUserDate = inputUserDate.value.split("-"); //разбил строку с датой в массив, убрав разделитель[yyyy, mm, dd]
   console.log(arrinputUserDate);
-
   ageUserY = currentDate.getFullYear() - arrinputUserDate[0]; // считаем возраст (года)
-  
-  if(currentDate.getMonth() + 1 <= arrinputUserDate[1]){
+  if (currentDate.getMonth() + 1 <= arrinputUserDate[1]) {
     // расчёт если ДР не наступило
-    ageUserM = (12-arrinputUserDate[1]) + (1+ currentDate.getMonth())
-    ageUserY = currentDate.getFullYear() -1 - arrinputUserDate[0]; 
-  } else{
-    ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1]
+    ageUserM = 12 - arrinputUserDate[1] + (1 + currentDate.getMonth());
+    ageUserY = currentDate.getFullYear() - 1 - arrinputUserDate[0];
+  } else {
+    ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1];
   }
-  
-  ageUserD = (ageUserY * 365) + (ageUserM * 30); // считаем возраст (дни)
+  ageUserD = ageUserY * 365 + ageUserM * 30; // считаем возраст (дни)
   ageUserT = ageUserD * 24; // считаем возраст (часы)
   console.log(
     "Ваш возраст " +
@@ -48,7 +45,6 @@ const getFullUserYear = () => {
       " минут"
   );
   console.log(ageUserM + " Полных Месяцев");
- 
 };
 
 
@@ -70,8 +66,40 @@ const userInfoTemp = ()=>{ //функция собирающая в объект
   userInfo.push(a)
 }
 
+////////////////////////////////////////////////////////////////
+//текст гороскопа на страницу//
+///////////////////////////////////////////////////////////////
+const resHoroRandom = () => {
+  const arrHoroRandom = [
+    "всё будет хорошо",
+    "всё сбудется, 18 лет не срок!",
+    "всё получится",
+    "всё сбудется, ты продолжаешь начатое 18 лет назад",
+    "правильно, продолжай в том-же духе",
+    "всё отлично",
+    "финансовые дела пойдут только вверх",
+    "только смотрите в оба глаза",
+    "могут быть трудности, но они все решаемы!",
+    "с вышим талантом положительный результат обеспечен",
+    "путь к js составил более 18 лет ))",
+  ];
+  let horoRandom = Math.floor(Math.random() * arrHoroRandom.length); // получил случайный номер массива
+  //console.log(horoRandom)
+  //console.log(resHoroRandom(horoRandom))
+  let horoTxt =
+    "Впереди вас ждет очень интересная финансовая операция, " +
+    arrHoroRandom[horoRandom];
+  return horoTxt;
+};
+
+////////////////////////////////////////////////////////////////
+//вывод результатов на страницу//
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////
+//вывод всех пользователей на страницу
+///////////////////////////////
 const printAlluser = () => {
-  //вывод результатов на страницу (69 строка)
   results.innerHTML = ""; // затёр блок результатов
 
   userInfo.forEach((user, i) => {
@@ -93,38 +121,10 @@ const printAlluser = () => {
     results.appendChild(userNode);
   });
 };
-////////////////////////////////////////////////////////////////
-//текст гороскопа на страницу//
-///////////////////////////////////////////////////////////////
-const resHoroRandom = ()=> {
-const arrHoroRandom = [
-  'всё будет хорошо',
-  'всё сбудется, 18 лет не срок!',
-  'всё получится',
-  'всё сбудется, ты продолжаешь начатое 18 лет назад',
-  'правильно, продолжай в том-же духе',
-  'всё отлично',
-  'финансовые дела пойдут только вверх',
-  'только смотрите в оба глаза',
-  'могут быть трудности, но они все решаемы!',
-  'с вышим талантом положительный результат обеспечен',
-  'путь к js составил более 18 лет ))',
-]
-let horoRandom = Math.floor(Math.random() * arrHoroRandom.length);// получил случайный номер массива
-//console.log(horoRandom)
-//console.log(resHoroRandom(horoRandom))
-let horoTxt = 'Впереди вас ждет очень интересная финансовая операция, '+ arrHoroRandom[horoRandom]
-    return horoTxt
-}
-
-
-
-
-
-////////////////////////////////////////////////////////////////
-//вывод результатов на страницу//
-///////////////////////////////////////////////////////////////
-const printRes = () => { //вывод результатов на страницу
+///////////////////////////////
+//вывод текущего результатата на страницу
+///////////////////////////////
+const printRes = () => { 
   results.innerHTML =
     "<p><b>Текущая дата </b></p>" +
     currentDate +
@@ -151,37 +151,38 @@ const printRes = () => { //вывод результатов на страниц
 //Проверка на одинаковую дату//
 ///////////////////////////////////////////////////////////////
 
-
 const checkData = () => {
   // проверка на одинаковую дату
   let arrDateCurrent = new Date() // выводит в строке текущую дату(в реверсе) (гггг,мм,дд)
-    .toLocaleDateString()// взял только дату без времени
-    .split(".")//убрал разделитель и добавил всё в массив
-    .reverse()// перевернул массив с [дд мм гггг] в [гггг мм дд]
+    .toLocaleDateString() // взял только дату без времени
+    .split(".") //убрал разделитель и добавил всё в массив
+    .reverse() // перевернул массив с [дд мм гггг] в [гггг мм дд]
     .join(); // перевёл массив строку (гггг,мм,дд)
-  console.log(arrDateCurrent); 
+  console.log(arrDateCurrent);
 
   if (
     arrDateCurrent === arrinputUserDate.join() ||
     (arrinputUserDate !== null && !isNaN(arrinputUserDate))
   ) {
-    alert("wrong date")
-    return true
-    
-  } else{
-    return false
+    alert("wrong date");
+    return true;
+  } else {
+    return false;
   }
 };
 
-
-const checkName = ()=>{ // проверка пустой строки или цифры
-  if(inputUserName.value !== null && !isNaN(inputUserName.value)){ 
-    return true
-  } else{
-    return false
+const checkName = () => {
+  // проверка пустой строки или цифры
+  if (inputUserName.value !== null && !isNaN(inputUserName.value)) {
+    return true;
+  } else {
+    return false;
   }
-}
+};
 
+////////////////////////////////////////////////////////////////
+//Кнопки//
+///////////////////////////////////////////////////////////////
 
 btn_sumbit.onclick = ()=>{ 
   if(checkName()){ // проверка пустой строки или цифры
