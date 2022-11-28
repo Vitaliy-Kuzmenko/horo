@@ -25,26 +25,29 @@ const calcYearHoro = () => {
 const getFullUserYear = () => {
   arrinputUserDate = inputUserDate.value.split("-"); //разбил строку с датой в массив, убрав разделитель[yyyy, mm, dd]
   console.log(arrinputUserDate);
-  ageUserY = currentDate.getFullYear() - arrinputUserDate[0]; // считаем возраст (года)
-  if (currentDate.getMonth() + 1 <= arrinputUserDate[1]) {
-    // расчёт если ДР не наступило
-    ageUserM = 12 - arrinputUserDate[1] + (1 + currentDate.getMonth());
-    ageUserY = currentDate.getFullYear() - 1 - arrinputUserDate[0];
-  } else {
-    ageUserM = currentDate.getMonth() + 1 - arrinputUserDate[1];
+  //ageUserY = currentDate.getFullYear() - arrinputUserDate[0]; // считаем возраст (года)
+  if ((currentDate.getFullYear() - arrinputUserDate[0])==0){
+    // расчёт если возраст 0 лет
+    ageUserY = currentDate.getFullYear() - arrinputUserDate[0]; //тек.год-введён.год
+    ageUserM = (currentDate.getMonth() + 1) - arrinputUserDate[1];// (тек.мес+1) - введён.мес
+    ageUserD = (ageUserY * 365 + ageUserM * 30)+ (currentDate.getUTCDate() - arrinputUserDate[2]); // (возраст.лет*365+возраст.мес *30)+ (тек.дата - введ.дата) считаем возраст (дни)
+    ageUserT = ageUserD * 24; // считаем возраст (часы)
+console.log('если 0 лет')
   }
-  ageUserD = ageUserY * 365 + ageUserM * 30; // считаем возраст (дни)
-  ageUserT = ageUserD * 24; // считаем возраст (часы)
-  console.log(
-    "Ваш возраст " +
-      ageUserY +
-      " лет, " +
-      ageUserD +
-      " дней, " +
-      ageUserT +
-      " минут"
-  );
-  console.log(ageUserM + " Полных Месяцев");
+  else if(currentDate.getMonth() + 1 < arrinputUserDate[1]) {
+    // расчёт если ДР не наступило
+    ageUserY = currentDate.getFullYear() - arrinputUserDate[0]-1;
+    ageUserM = (12 - arrinputUserDate[1]) + (currentDate.getMonth()-1)+1;
+    ageUserD = (ageUserY * 365 + ageUserM * 30)+ (currentDate.getUTCDate() - arrinputUserDate[2]); // (возраст.лет*365+возраст.мес *30)+ (тек.дата - введ.дата) считаем возраст (дни)
+    ageUserT = ageUserD * 24; // считаем возраст (часы)
+    console.log('если др ещё не наступило')
+  } else {
+    ageUserY = currentDate.getFullYear() - arrinputUserDate[0];
+    ageUserM = (currentDate.getMonth() + 1) - arrinputUserDate[1];
+    ageUserD = (ageUserY * 365 + ageUserM * 30)+ (currentDate.getUTCDate() - arrinputUserDate[2]); // (возраст.лет*365+возраст.мес *30)+ (тек.дата - введ.дата) считаем возраст (дни)
+    ageUserT = ageUserD * 24; // считаем возраст (часы)
+  }
+  
 };
 
 
@@ -57,11 +60,11 @@ const userInfoTemp = ()=>{ //функция собирающая в объект
  let a
   a = {
   name: inputUserName.value,
-  ageUserY1:  ageUserY,
-  ageUserM: ageUserM,
-  ageUserD: ageUserD,
-  ageUserT: ageUserT,
-  userCorrentHoro: userCorrentHoro,
+  'ageUserY1':  ageUserY,
+  'ageUserM': ageUserM,
+  'ageUserD': ageUserD,
+  'ageUserT': ageUserT,
+  'userCorrentHoro': userCorrentHoro,
   }
   userInfo.push(a)
 }
@@ -84,8 +87,6 @@ const resHoroRandom = () => {
     "путь к js составил более 18 лет ))",
   ];
   let horoRandom = Math.floor(Math.random() * arrHoroRandom.length); // получил случайный номер массива
-  //console.log(horoRandom)
-  //console.log(resHoroRandom(horoRandom))
   let horoTxt =
     "Впереди вас ждет очень интересная финансовая операция, " +
     arrHoroRandom[horoRandom];
@@ -144,7 +145,7 @@ const printRes = () => {
     ageUserD +
     " Всего дней, " +
     ageUserT +
-    " Всего минут " 
+    " Всего часа " 
 };
 
 ////////////////////////////////////////////////////////////////
@@ -198,6 +199,7 @@ btn_sumbit.onclick = ()=>{
   resHoroRandom()
   checkData()
   console.log (userInfo )
+
   inputUserDate.value = '' // сбросил дату
   inputUserName.value = '' //сбросил имя
   //alert('download complead')
@@ -208,7 +210,6 @@ btn_sumbitAlluser.onclick = ()=>{
   printAlluser()
 }
 
-//new Date('1988-03-21')
 
 
 
