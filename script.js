@@ -46,8 +46,24 @@ console.log('если 0 лет')
     ageUserM = (currentDate.getMonth() + 1) - arrinputUserDate[1];
     ageUserD = (ageUserY * 365 + ageUserM * 30)+ (currentDate.getUTCDate() - arrinputUserDate[2]); // (возраст.лет*365+возраст.мес *30)+ (тек.дата - введ.дата) считаем возраст (дни)
     ageUserT = ageUserD * 24; // считаем возраст (часы)
+    console.log('если др наступило' + ageUserM)
   }
   
+  
+  console.log(
+    "Ваш возраст " +
+      ageUserY +
+      " лет, " +
+      ageUserD +
+      " дней, " +
+      ageUserT +
+      " часа"
+  );
+  //console.log(ageUserM + " Полных Месяцев");
+  console.log(currentDate.getMonth() + 1);
+  console.log(arrinputUserDate[1])
+  console.log((currentDate.getMonth() + 1) - arrinputUserDate[1])
+  //console.log(ageUserM = (12 - arrinputUserDate[1]) + (currentDate.getMonth()-1)+1)
 };
 
 
@@ -87,6 +103,8 @@ const resHoroRandom = () => {
     "путь к js составил более 18 лет ))",
   ];
   let horoRandom = Math.floor(Math.random() * arrHoroRandom.length); // получил случайный номер массива
+  //console.log(horoRandom)
+  //console.log(resHoroRandom(horoRandom))
   let horoTxt =
     "Впереди вас ждет очень интересная финансовая операция, " +
     arrHoroRandom[horoRandom];
@@ -160,7 +178,7 @@ const checkData = () => {
     .reverse() // перевернул массив с [дд мм гггг] в [гггг мм дд]
     .join(); // перевёл массив строку (гггг,мм,дд)
   console.log(arrDateCurrent);
-
+console.log(arrinputUserDate)
   if (
     arrDateCurrent === arrinputUserDate.join() ||
     (arrinputUserDate !== null && !isNaN(arrinputUserDate))
@@ -186,18 +204,19 @@ const checkName = () => {
 ///////////////////////////////////////////////////////////////
 
 btn_sumbit.onclick = ()=>{ 
+  getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
+
   if(checkName()){ // проверка пустой строки или цифры
     alert('wrong name!')
-  } else if(false) {
+  } else if(checkData()) {
     alert('wrong input Date')
   } else {
 
-  getFullUserYear()//Считаем полный возраст года, месяц, часы, минуты
   calcYearHoro () //Находим какой знак по китайскому гороскопу
-  userInfoTemp() // вызываем функцию собирающую в объект все данные пользователя и добавлющаяя  эти данные в массив
+  userInfoTemp() // вызываем функцию собирающую в объект все данные пользователя и добавлющаяя  эти данные в массив  
   printRes() //выводим результат на страницу
   resHoroRandom()
-  checkData()
+ 
   console.log (userInfo )
 
   inputUserDate.value = '' // сбросил дату
@@ -210,6 +229,7 @@ btn_sumbitAlluser.onclick = ()=>{
   printAlluser()
 }
 
+//new Date('1988-03-21')
 
 
 
