@@ -2,6 +2,9 @@ const inputUserName =  document.getElementById('name_user'); //Подключи�
 const inputUserDate = document.getElementById('date_user'); //подключил форму выбора даты
 const btn_sumbit = document.getElementById('btn_sumbit'); // Подключил кнопку "получить результат"
 const btn_sumbitAlluser = document.getElementById('btn_sumbitAlluser'); // Подключил кнопку "получить результат"
+const btn_bgr_color = document.getElementById('btn_bgr_color');//подключил кнопку смены цвета фона
+const btn_resBgr_color = document.getElementById('btn_resBgr_color');//подключил кнопку смены цвета фона
+
 const results = document.getElementById('results');//подключил блок для вывода результатов
 const currentDate = new Date(); // Получили текущую дату 
 console.log('Текущая дата ' + currentDate)
@@ -15,6 +18,21 @@ let ageUserM // сколько месяцев пользователю
 let ageUserD // сколько дней пользователю
 let ageUserT// сколько часов
 let arrinputUserDate // объявил переменную в которую запишем ввдённую дату без разделителя [yyyy, mm, dd]
+
+const fun_change_bgrc = (color)=>{
+document.querySelector('.center').style.backgroundColor = color
+}
+const fun_resChange_bgrc = (color)=>{
+  document.querySelector('.center').style.backgroundColor = color
+  }
+
+
+btn_bgr_color.onclick = ()=>{
+  fun_change_bgrc("green")
+}
+btn_resBgr_color.onclick = ()=>{
+  fun_resChange_bgrc("")
+}
 
 const calcYearHoro = () => {
   //функция вычесляющая остаток от деления на 12 лет от введённой даты
